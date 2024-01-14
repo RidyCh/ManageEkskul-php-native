@@ -1,9 +1,37 @@
 <?php
-  include '../conf/conn.php';
+include '../conf/conn.php';
 
-  if (!isset($_SESSION['id_user'])) {
-    header("Location: ../../login.php");
-  }
+if (!isset($_SESSION['id_user'])) {
+  header("Location: ../../login.php");
+}
+
+$query = "SELECT tb_ekskul.ekskul
+    FROM tb_user
+    INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
+    Where tb_user.id_user = '$_SESSION[id_user]'";
+
+$rs = $conn->query($query);
+$num = $rs->num_rows;
+$rrw = $rs->fetch_assoc();
+
+
+
+// ======================= DELETE ANGGOTA =======================
+// if (isset($_GET['id_anggota']) && isset($_GET['action']) && $_GET['action'] == "delete") {
+//   $id_anggota = $_GET['id_anggota'];
+
+//   $query = mysqli_query($conn, "DELETE FROM tb_anggota WHERE id_anggota='$id_anggota'");
+
+//   if ($query == TRUE) {
+
+//     echo "<script type = \"text/javascript\">
+//             window.location = (\"index.php\")
+//             </script>";
+//   } else {
+
+//     // $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>An error Occurred!</div>";
+//   }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -51,38 +79,9 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <!-- general form elements -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Quick Example</h3>
-                </div>
-                <!-- /.card-header -->
-                <!-- form start -->
-                <form action="" method="post">
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Nama Lengkap</label>
-                      <input type="text" name="nama_anggota" class="form-control" id="exampleInputEmail1" placeholder="Nama Lengkap">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Kelas</label>
-                      <input type="text" name="kelas" class="form-control" id="exampleInputPassword1" placeholder="Kelas">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword2">Ekstrakulikuler</label>
-                      <input type="text" name="id_ekskul" class="form-control" id="exampleInputPassword2" placeholder="Basket">
-                    </div>
-                  </div>
-                  <!-- /.card-body -->
-
-                  <div class="card-footer">
-                    <button type="submit" name="kirim" class="btn btn-primary">Submit</button>
-                  </div>
-                </form>
-              </div>
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">DataTable with default features</h3>
+                  <h3 class="card-title"><a href="index.php?page=create-anggota" class="btn btn-primary"><i class="ion ion-plus"></i> Tambah</a></h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -100,19 +99,22 @@
                       <?php
                       include "../conf/conn.php";
                       $no = 0;
-                      $query = mysqli_query($conn, "SELECT * FROM tb_anggota");
+                      $query = mysqli_query($conn, "SELECT *
+                      FROM tb_anggota
+                      INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_anggota.id_ekskul
+                      Where tb_anggota.id_ekskul = '$_SESSION[id_ekskul]'");
                       while ($row = mysqli_fetch_array($query)) {
                       ?>
                         <tr>
                           <td><?php echo $no = $no + 1; ?></td>
                           <td><?php echo $row['nama_anggota']; ?></td>
                           <td><?php echo $row['kelas']; ?></td>
-                          <td><?php echo $row['id_ekskul']; ?></td>
+                          <td><?php echo $row['ekskul']; ?></td>
                           <td>
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
+                            <a href="index.php?page=update-anggota&id_anggota=<?php echo $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
+                            <a href="index.php?page=delete-anggota&id_anggota=<?php echo $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
                               <i class="fas fa-trash"></i>
                             </a>
                           </td>

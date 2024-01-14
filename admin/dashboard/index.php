@@ -5,7 +5,7 @@ if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
 }
 
-$query = "SELECT tb_ekskul.id_ekskul
+$query = "SELECT tb_ekskul.ekskul
     FROM tb_user
     INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
     Where tb_user.id_user = '$_SESSION[id_user]'";
@@ -48,11 +48,6 @@ $rrw = $rs->fetch_assoc();
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -60,7 +55,7 @@ $rrw = $rs->fetch_assoc();
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Dashboard - <?php echo $rrw['id_ekskul'];?></h1>
+              <h1 class="m-0">Dashboard - <?php echo $rrw['ekskul']; ?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -84,15 +79,15 @@ $rrw = $rs->fetch_assoc();
                 <div class="inner">
                   <h3><?php
                       $query1 = mysqli_query($conn, "SELECT * FROM tb_anggota WHERE id_ekskul = '$_SESSION[id_ekskul]'");
-                      $students = mysqli_num_rows($query1);
-                      ?><?php echo $students;?></h3>
+                      $anggotas = mysqli_num_rows($query1);
+                      ?><?php echo $anggotas;?></h3>
 
                   <p>Anggota Ekstrakukuler</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person"></i>
                 </div>
-                <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="index.php?page=anggota" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -100,14 +95,17 @@ $rrw = $rs->fetch_assoc();
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53</h3>
+                <h3><?php
+                      $query1 = mysqli_query($conn, "SELECT * FROM tb_jadwal WHERE id_ekskul = '$_SESSION[id_ekskul]'");
+                      $jadwals = mysqli_num_rows($query1);
+                      ?><?php echo $jadwals;?></h3>
 
                   <p>Jadwal Ekstrakulikuler</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-time"></i>
                 </div>
-                <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="index.php?page=jadwal" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -115,14 +113,17 @@ $rrw = $rs->fetch_assoc();
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
+                <h3><?php
+                      $query1 = mysqli_query($conn, "SELECT * FROM tb_presensi WHERE id_ekskul = '$_SESSION[id_ekskul]'");
+                      $presensis = mysqli_num_rows($query1);
+                      ?><?php echo $presensis;?></h3>
 
                   <p>Presensi Anggota</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-calendar"></i>
                 </div>
-                <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="index.php?page=presensi" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->

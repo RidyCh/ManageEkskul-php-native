@@ -2,15 +2,6 @@
 include '../conf/conn.php';
 include '../conf/session.php';
 
-$query = "SELECT tb_ekskul.id_ekskul
-    FROM tb_user
-    INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
-    Where tb_user.id_user = '$_SESSION[id_user]'";
-
-$rs = $conn->query($query);
-$num = $rs->num_rows;
-$rrw = $rs->fetch_assoc();
-
 ?>
 
 <!DOCTYPE html>
@@ -51,9 +42,9 @@ $rrw = $rs->fetch_assoc();
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__shake" src="../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
+    </div> -->
 
     <?php include('../utils/navbar.php') ?>
 

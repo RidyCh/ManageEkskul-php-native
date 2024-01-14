@@ -43,55 +43,9 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <!-- general form elements -->
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h3 class="card-title">Quick Example</h3>
-                </div>
-                <!-- /.card-header -->
-                <!-- form start -->
-                <form action="" method="post">
-                  <div class="card-body">
-                    <div class="form-group">
-                      <input type="hidden" name="ekskul_role" class="form-control">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Tanggal Ekskul</label>
-                      <input type="date" name="tanggal_ekskul" class="form-control" id="exampleInputEmail1" placeholder="Atur Tanggal">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Lokasi</label>
-                      <input type="text" name="lokasi" class="form-control" id="exampleInputPassword1" placeholder="lokasi">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword2">Jam Mulai</label>
-                      <input type="time" name="jam_mulai" class="form-control" id="exampleInputPassword2" placeholder="Jam Mulai">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword2">Jam Selesai</label>
-                      <input type="time" name="jam_selesai" class="form-control" id="exampleInputPassword2" placeholder="Jam Selesai">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword2">Status</label>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="Ada" value="Ada">
-                        <label class="form-check-label" for="Ada">Ada</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="Tidak" value="Tidak">
-                        <label class="form-check-label" for="Tidak">Tidak</label>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                </form>
-              </div>
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">DataTable with default features</h3>
+                  <h3 class="card-title"><a href="index.php?page=create-jadwal" class="btn btn-primary"><i class="ion ion-plus"></i> Tambah</a></h3>
                 </div>
 
                 <div class="card-body">
@@ -108,22 +62,32 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>24-01-12</td>
-                        <td>smk</td>
-                        <td>10</td>
-                        <td>12</td>
-                        <td>hadir</td>
-                        <td>
-                          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
-                            <i class="fas fa-edit"></i>
-                          </a>
-                          <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
-                            <i class="fas fa-trash"></i>
-                          </a>
-                        </td>
-                      </tr>
+                      <?php
+                      include "../conf/conn.php";
+                      $no = 0;
+                      $query = mysqli_query($conn, "SELECT *
+                      FROM tb_jadwal
+                      INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_jadwal.id_ekskul
+                      Where tb_jadwal.id_ekskul = '$_SESSION[id_ekskul]'");
+                      while ($row = mysqli_fetch_array($query)) {
+                      ?>
+                        <tr>
+                          <td><?php echo $no = $no + 1; ?></td>
+                          <td><?php echo $row['tanggal_ekskul']; ?></td>
+                          <td><?php echo $row['lokasi']; ?></td>
+                          <td><?php echo $row['jam_mulai']; ?></td>
+                          <td><?php echo $row['jam_selesai']; ?></td>
+                          <td><?php echo $row['status']; ?></td>
+                          <td>
+                            <a href="index.php?page=update-jadwal&id_jadwal=<?php echo $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
+                              <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="index.php?page=delete-jadwal&id_jadwal=<?php echo $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
+                              <i class="fas fa-trash"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      <?php } ?>
                     </tbody>
                   </table>
                 </div>

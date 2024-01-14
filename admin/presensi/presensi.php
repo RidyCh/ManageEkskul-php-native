@@ -33,7 +33,8 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Preseni</li>
+                <li class="breadcrumb-item">Presensi</li>
+                <li class="breadcrumb-item active">Presensi Jadwal</li>
               </ol>
             </div>
           </div>
@@ -43,54 +44,55 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">DataTable with default features</h3>
-                </div>
-
-                <div class="card-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th class="col-1">No</th>
-                        <th class="col-9">Tanggal Ekskul</th>
-                        <th class="col-2">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      include "../conf/conn.php";
-                      $no = 0;
-                      $query = mysqli_query($conn, "SELECT *
-                      FROM tb_jadwal
-                      INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_jadwal.id_ekskul
-                      Where tb_jadwal.id_ekskul = '$_SESSION[id_ekskul]'");
-
-                      $query1 = mysqli_query($conn, "SELECT *
+              <?php
+              include "../conf/conn.php";
+              $no = 0;
+              $query = mysqli_query($conn, "SELECT *
                       FROM tb_presensi
-                      -- INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_jadwal.id_ekskul
+                      INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_presensi.id_ekskul
+                      INNER JOIN tb_anggota ON tb_anggota.id_anggota = tb_presensi.id_anggota
                       INNER JOIN tb_jadwal ON tb_jadwal.id_jadwal = tb_presensi.id_jadwal
                       Where tb_presensi.id_ekskul = '$_SESSION[id_ekskul]'");
+                      
+              while ($row = mysqli_fetch_assoc($query)) {
+              ?>
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title"><?php echo $row['tanggal_ekskul']; ?> | <a href="index.php?page=create-presensi" class="btn btn-primary"><i class="ion ion-plus"></i> Tambah</a></h3>
+                  </div>
 
-                      $row1 = mysqli_fetch_array($query1);
-
-                      while ($row = mysqli_fetch_array($query)) {
-                      ?>
+                  <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th class="col-1">No</th>
+                          <th class="col-4">Nama Anggota</th>
+                          <th class="col-3">Ekstrakulikuler</th>
+                          <th class="col-2">Kehadiran</th>
+                          <th class="col-2">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         <tr>
                           <td><?php echo $no = $no + 1; ?></td>
-                          <td><?php echo $row['tanggal_ekskul']; ?></td>
+                          <td><?php echo $row['nama_anggota']; ?></td>
+                          <td><?php echo $row['ekskul']; ?></td>
+                          <td><?php echo $row['kehadiran']; ?></td>
                           <td>
-                            <a href="index.php?page=jadwal-presensi&id_jadwal=<?php echo $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-success">
-                              <i class="fas fa-eye"></i>
+                            <a href="index.php?page=update-presensi&id_presensi=<?php echo $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
+                              <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="index.php?page=delete-presensi&id_presensi=<?php echo $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
+                              <i class="fas fa-trash"></i>
                             </a>
                           </td>
                         </tr>
                       <?php } ?>
-                    </tbody>
-                  </table>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
                 </div>
-                <!-- /.card-body -->
-              </div>
             </div>
           </div>
       </section>

@@ -1,3 +1,20 @@
+<?php
+include '../conf/conn.php';
+
+if (!isset($_SESSION['id_user'])) {
+  header("Location: ../../login.php");
+}
+
+$query = "SELECT tb_ekskul.ekskul
+    FROM tb_user
+    INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
+    Where tb_user.id_user = '$_SESSION[id_user]'";
+
+$rs = $conn->query($query);
+$num = $rs->num_rows;
+$rrw = $rs->fetch_assoc();
+?>
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="#  " class="brand-link">
@@ -13,8 +30,8 @@
         <img src="../dist/img/profile.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block text-md">Alexander Pierce</a>
-        <a href="#" class="d-block text-white text-sm">Ketua Cospala</a>
+        <a href="#" class="d-block text-md"><?php echo $_SESSION['nama_lengkap']; ?></a>
+        <a href="#" class="d-block text-white text-sm">Ketua <?php echo $rrw['ekskul']; ?></a>
       </div>
     </div>
 

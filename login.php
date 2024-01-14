@@ -2,6 +2,9 @@
 include 'conf/conn.php';
 session_start();
 
+if (isset($_SESSION['id_user'])) {
+  header("Location: admin/index.php");
+}
 ?>
 
 <!DOCTYPE html>
