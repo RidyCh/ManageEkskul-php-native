@@ -1,15 +1,15 @@
 <?php
 include '../conf/conn.php';
-// include '../conf/session.php';
+include '../conf/session.php';
 
-// $query = "SELECT tb_ekskul.ekskul
-//     FROM tb_user
-//     INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
-//     Where tb_user.id = '$_SESSION[id_user]'";
+$query = "SELECT tb_ekskul.id_ekskul
+    FROM tb_user
+    INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
+    Where tb_user.id_user = '$_SESSION[id_user]'";
 
-// $rs = $conn->query($query);
-// $num = $rs->num_rows;
-// $rrw = $rs->fetch_assoc();
+$rs = $conn->query($query);
+$num = $rs->num_rows;
+$rrw = $rs->fetch_assoc();
 
 ?>
 

@@ -1,3 +1,20 @@
+<?php
+include '../conf/conn.php';
+
+if (!isset($_SESSION['id_user'])) {
+  header("Location: ../../login.php");
+}
+
+$query = "SELECT tb_ekskul.id_ekskul
+    FROM tb_user
+    INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
+    Where tb_user.id_user = '$_SESSION[id_user]'";
+
+$rs = $conn->query($query);
+$num = $rs->num_rows;
+$rrw = $rs->fetch_assoc();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +60,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Dashboard</h1>
+              <h1 class="m-0">Dashboard - <?php echo $rrw['id_ekskul'];?></h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -65,7 +82,10 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php
+                      $query1 = mysqli_query($conn, "SELECT * FROM tb_anggota WHERE id_ekskul = '$_SESSION[id_ekskul]'");
+                      $students = mysqli_num_rows($query1);
+                      ?><?php echo $students;?></h3>
 
                   <p>Anggota Ekstrakukuler</p>
                 </div>

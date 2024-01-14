@@ -1,3 +1,11 @@
+<?php
+  include '../conf/conn.php';
+
+  if (!isset($_SESSION['id_user'])) {
+    header("Location: ../../login.php");
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +76,7 @@
                   <!-- /.card-body -->
 
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="kirim" class="btn btn-primary">Submit</button>
                   </div>
                 </form>
               </div>

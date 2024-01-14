@@ -83,13 +83,15 @@ session_start();
 
   <?php
   if (isset($_POST['login'])) {
+    include 'conf/conn.php';
+
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $password = md5($password);
+    // $password = md5($password);
 
     $query = "SELECT * FROM tb_user WHERE username = '$username' AND password = '$password'";
-    $rs = $conn->query($query);
-    $num = $rs->num_rows;
+    $rs = mysqli_query($conn, $query);
+    $num = mysqli_num_rows($rs);
     $rows = $rs->fetch_assoc();
 
     if ($num > 0) {

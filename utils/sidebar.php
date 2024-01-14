@@ -54,7 +54,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="../index.php" class="nav-link bg-danger">
+          <a href="../admin/logout.php" class="nav-link bg-danger">
             <i class="nav-icon ion ion-information-circled"></i>
             <p>Logout</p>
           </a>
