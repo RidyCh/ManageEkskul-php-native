@@ -3,6 +3,7 @@ include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
+  die();
 }
 
 // Mendapatkan id_user dari user yang sedang login
@@ -22,7 +23,7 @@ if (isset($_POST['kirim'])) {
 
   if ($query_create_anggota === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../ekskul/admin/anggota/index.php\")
+            window.location = (\"../../admin/anggota/index.php\")
             </script>";
   } else {
     echo "Error: " . $query_create_anggota . "<br>" . $conn->error;

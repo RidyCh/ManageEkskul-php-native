@@ -3,6 +3,7 @@ include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
+  die();
 }
 
 if (isset($_POST['update'])) {
@@ -15,7 +16,7 @@ if (isset($_POST['update'])) {
 
   if ($query_update_anggota === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../ekskul/admin/anggota/index.php\")
+            window.location = (\"../../admin/anggota/index.php\")
             </script>";
   } else {
     echo "Error: " . $query_update_anggota . "<br>" . $conn->error;
@@ -71,11 +72,11 @@ while ($row = mysqli_fetch_array($result)) {
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Lengkap</label>
-                    <input type="text" name="nama_anggota" class="form-control" id="exampleInputEmail1" value="<?php echo $nama_anggota;?>" required>
+                    <input type="text" name="nama_anggota" class="form-control" id="exampleInputEmail1" value="<?= $nama_anggota;?>" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Kelas</label>
-                    <input type="text" name="kelas" class="form-control" id="exampleInputPassword1" value="<?php echo $kelas;?>" required>
+                    <input type="text" name="kelas" class="form-control" id="exampleInputPassword1" value="<?= $kelas;?>" required>
                   </div>
                 </div>
                 <!-- /.card-body -->

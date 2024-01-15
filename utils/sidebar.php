@@ -70,6 +70,7 @@ $rrw = $rs->fetch_assoc();
             <p>Informasi</p>
           </a>
         </li>
+        <hr />
         <li class="nav-item">
           <a href="../admin/logout.php" class="nav-link bg-danger">
             <i class="nav-icon ion ion-information-circled"></i>

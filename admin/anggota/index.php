@@ -3,6 +3,7 @@ include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
+  die();
 }
 
 $query = "SELECT tb_ekskul.ekskul
@@ -14,24 +15,6 @@ $rs = $conn->query($query);
 $num = $rs->num_rows;
 $rrw = $rs->fetch_assoc();
 
-
-
-// ======================= DELETE ANGGOTA =======================
-// if (isset($_GET['id_anggota']) && isset($_GET['action']) && $_GET['action'] == "delete") {
-//   $id_anggota = $_GET['id_anggota'];
-
-//   $query = mysqli_query($conn, "DELETE FROM tb_anggota WHERE id_anggota='$id_anggota'");
-
-//   if ($query == TRUE) {
-
-//     echo "<script type = \"text/javascript\">
-//             window.location = (\"index.php\")
-//             </script>";
-//   } else {
-
-//     // $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>An error Occurred!</div>";
-//   }
-// }
 ?>
 
 <!DOCTYPE html>
@@ -106,15 +89,15 @@ $rrw = $rs->fetch_assoc();
                       while ($row = mysqli_fetch_array($query)) {
                       ?>
                         <tr>
-                          <td><?php echo $no = $no + 1; ?></td>
-                          <td><?php echo $row['nama_anggota']; ?></td>
-                          <td><?php echo $row['kelas']; ?></td>
-                          <td><?php echo $row['ekskul']; ?></td>
+                          <td><?= $no = $no + 1; ?></td>
+                          <td><?= $row['nama_anggota']; ?></td>
+                          <td><?= $row['kelas']; ?></td>
+                          <td><?= $row['ekskul']; ?></td>
                           <td>
-                            <a href="index.php?page=update-anggota&id_anggota=<?php echo $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
+                            <a href="index.php?page=update-anggota&id_anggota=<?= $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a href="index.php?page=delete-anggota&id_anggota=<?php echo $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
+                            <a href="index.php?page=delete-anggota&id_anggota=<?= $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
                               <i class="fas fa-trash"></i>
                             </a>
                           </td>

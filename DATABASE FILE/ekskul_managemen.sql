@@ -70,7 +70,7 @@ INSERT INTO `tb_ekskul` (`id_ekskul`, `ekskul`) VALUES
 CREATE TABLE `tb_jadwal` (
   `id_jadwal` int(11) NOT NULL,
   `id_ekskul` int(11) NOT NULL,
-  `jadwal_ekskul` date NOT NULL,
+  `tanggal_ekskul` date NOT NULL,
   `lokasi` varchar(50) NOT NULL,
   `jam_mulai` time(6) NOT NULL,
   `jam_selesai` time(6) NOT NULL,

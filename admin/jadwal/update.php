@@ -3,6 +3,7 @@ include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
+  die();
 }
 
 if (isset($_POST['update'])) {
@@ -18,7 +19,7 @@ if (isset($_POST['update'])) {
 
   if ($query_update_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../ekskul/admin/jadwal/index.php\")
+            window.location = (\"../../admin/jadwal/index.php\")
             </script>";
   } else {
     echo "Error: " . $query_update_jadwal . "<br>" . $conn->error;

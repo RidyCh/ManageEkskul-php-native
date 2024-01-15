@@ -1,3 +1,13 @@
+<?php
+include '../conf/conn.php';
+
+if (!isset($_SESSION['id_user'])) {
+  header("Location: ../../login.php");
+  die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,17 +82,17 @@
                       while ($row = mysqli_fetch_array($query)) {
                       ?>
                         <tr>
-                          <td><?php echo $no = $no + 1; ?></td>
-                          <td><?php echo $row['tanggal_ekskul']; ?></td>
-                          <td><?php echo $row['lokasi']; ?></td>
-                          <td><?php echo $row['jam_mulai']; ?></td>
-                          <td><?php echo $row['jam_selesai']; ?></td>
-                          <td><?php echo $row['status']; ?></td>
+                          <td><?= $no = $no + 1; ?></td>
+                          <td><?= $row['tanggal_ekskul']; ?></td>
+                          <td><?= $row['lokasi']; ?></td>
+                          <td><?= $row['jam_mulai']; ?></td>
+                          <td><?= $row['jam_selesai']; ?></td>
+                          <td><?= $row['status']; ?></td>
                           <td>
-                            <a href="index.php?page=update-jadwal&id_jadwal=<?php echo $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
+                            <a href="index.php?page=update-jadwal&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a href="index.php?page=delete-jadwal&id_jadwal=<?php echo $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
+                            <a href="index.php?page=delete-jadwal&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
                               <i class="fas fa-trash"></i>
                             </a>
                           </td>

@@ -3,6 +3,7 @@ include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
+  die();
 }
 
 // Mendapatkan id_user dari user yang sedang login
@@ -25,7 +26,7 @@ if (isset($_POST['kirim'])) {
 
   if ($query_create_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../ekskul/admin/jadwal/index.php\")
+            window.location = (\"../../admin/jadwal/index.php\")
             </script>";
   } else {
     echo "Error: " . $query_create_jadwal . "<br>" . $conn->error;

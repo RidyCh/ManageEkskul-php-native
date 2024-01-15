@@ -3,6 +3,7 @@ include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
+  die();
 }
 
 // Mendapatkan id_user dari user yang sedang login
@@ -25,7 +26,7 @@ if (isset($_POST['kirim'])) {
 
   if ($query_create_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../ekskul/admin/jadwal/index.php\")
+            window.location = (\"../../admin/jadwal/index.php\")
             </script>";
   } else {
     echo "Error: " . $query_create_jadwal . "<br>" . $conn->error;
@@ -70,16 +71,20 @@ $conn->close();
                     <label for="exampleInputEmail1">Nama Anggota</label>
                     <select name="id_anggota" class="form-control" id="exampleInputEmail1" placeholder="Atur Tanggal">
                       <option value="1">1</option>
+                      <option value="1">1</option>
+                      <option value="1">1</option>
+                      <option value="1">1</option>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group  ">
                     <label for="exampleInputPassword2">Kehadiran</label>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="kehadiran" id="Hadir" value="Hadir">
                       <label class="form-check-label" for="Hadir">Hadir</label>
-                    </div>
-                    <div class="form-check">
+                      <br>
                       <input class="form-check-input" type="radio" name="kehadiran" id="Tidak Hadir" value="Tidak Hadir">
                       <label class="form-check-label" for="Tidak Hadir">Tidak Hadir</label>
+                    </div>
+                    <div class="form-check">
                     </div>
                   </div>
                   <!-- /.card-body -->

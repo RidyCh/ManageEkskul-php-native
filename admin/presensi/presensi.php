@@ -1,3 +1,13 @@
+<?php
+include '../conf/conn.php';
+
+if (!isset($_SESSION['id_user'])) {
+  header("Location: ../../login.php");
+  die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,19 +56,23 @@
             <div class="col-12">
               <?php
               include "../conf/conn.php";
+
               $no = 0;
+              $id_jadwal = $_GET['id_jadwal'];
+
               $query = mysqli_query($conn, "SELECT *
-                      FROM tb_presensi
-                      INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_presensi.id_ekskul
-                      INNER JOIN tb_anggota ON tb_anggota.id_anggota = tb_presensi.id_anggota
-                      INNER JOIN tb_jadwal ON tb_jadwal.id_jadwal = tb_presensi.id_jadwal
-                      Where tb_presensi.id_ekskul = '$_SESSION[id_ekskul]'");
-                      
+              FROM tb_presensi
+              LEFT JOIN tb_anggota ON tb_presensi.id_anggota = tb_anggota.id_anggota
+              LEFT JOIN tb_ekskul ON tb_presensi.id_ekskul = tb_ekskul.id_ekskul
+              LEFT JOIN tb_jadwal ON tb_presensi.id_jadwal = tb_jadwal.id_jadwal
+              WHERE tb_presensi.id_jadwal = $id_jadwal
+              AND tb_presensi.id_ekskul = '$_SESSION[id_ekskul]'");
+
               while ($row = mysqli_fetch_assoc($query)) {
               ?>
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title"><?php echo $row['tanggal_ekskul']; ?> | <a href="index.php?page=create-presensi" class="btn btn-primary"><i class="ion ion-plus"></i> Tambah</a></h3>
+                    <h3 class="card-title"><?= $row['tanggal_ekskul']; ?> | <a href="index.php?page=create-presensi" class="btn btn-primary"><i class="ion ion-plus"></i> Tambah</a></h3>
                   </div>
 
                   <div class="card-body">
@@ -74,15 +88,15 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td><?php echo $no = $no + 1; ?></td>
-                          <td><?php echo $row['nama_anggota']; ?></td>
-                          <td><?php echo $row['ekskul']; ?></td>
-                          <td><?php echo $row['kehadiran']; ?></td>
+                          <td><?= $no = $no + 1; ?></td>
+                          <td><?= $row['nama_anggota']; ?></td>
+                          <td><?= $row['ekskul']; ?></td>
+                          <td><?= $row['kehadiran']; ?></td>
                           <td>
-                            <a href="index.php?page=update-presensi&id_presensi=<?php echo $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
+                            <a href="index.php?page=update-presensi&id_presensi=<?= $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                               <i class="fas fa-edit"></i>
                             </a>
-                            <a href="index.php?page=delete-presensi&id_presensi=<?php echo $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
+                            <a href="index.php?page=delete-presensi&id_presensi=<?= $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
                               <i class="fas fa-trash"></i>
                             </a>
                           </td>

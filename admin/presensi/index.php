@@ -1,3 +1,13 @@
+<?php
+include '../conf/conn.php';
+
+if (!isset($_SESSION['id_user'])) {
+  header("Location: ../../login.php");
+  die();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,27 +70,18 @@
                     <tbody>
                       <?php
                       include "../conf/conn.php";
+
                       $no = 0;
-                      $query = mysqli_query($conn, "SELECT *
-                      FROM tb_jadwal
-                      INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_jadwal.id_ekskul
-                      Where tb_jadwal.id_ekskul = '$_SESSION[id_ekskul]'");
 
-                      $query1 = mysqli_query($conn, "SELECT *
-                      FROM tb_presensi
-                      -- INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_jadwal.id_ekskul
-                      INNER JOIN tb_jadwal ON tb_jadwal.id_jadwal = tb_presensi.id_jadwal
-                      Where tb_presensi.id_ekskul = '$_SESSION[id_ekskul]'");
-
-                      $row1 = mysqli_fetch_array($query1);
+                      $query = mysqli_query($conn, "SELECT * FROM tb_jadwal Where tb_jadwal.id_ekskul = '$_SESSION[id_ekskul]'");
 
                       while ($row = mysqli_fetch_array($query)) {
                       ?>
                         <tr>
-                          <td><?php echo $no = $no + 1; ?></td>
-                          <td><?php echo $row['tanggal_ekskul']; ?></td>
+                          <td><?= $no = $no + 1; ?></td>
+                          <td><?= $row['tanggal_ekskul']; ?></td>
                           <td>
-                            <a href="index.php?page=jadwal-presensi&id_jadwal=<?php echo $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-success">
+                            <a href="index.php?page=jadwal-presensi&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-success">
                               <i class="fas fa-eye"></i>
                             </a>
                           </td>
