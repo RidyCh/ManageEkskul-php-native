@@ -93,7 +93,7 @@ if (!isset($_SESSION['id_user'])) {
                           <td><?= $row['ekskul']; ?></td>
                           <td><?= $row['kehadiran']; ?></td>
                           <td>
-                            <a href="index.php?page=update-presensi&id_presensi=<?= $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
+                            <a href="index.php?page=update-presensi&id_jadwal=<?= $row['id_jadwal']; ?>&id_presensi=<?= $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                               <i class="fas fa-edit"></i>
                             </a>
                             <a href="index.php?page=delete-presensi&id_presensi=<?= $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">

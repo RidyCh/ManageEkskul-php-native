@@ -63,11 +63,10 @@ if (!isset($_SESSION['id_user'])) {
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th class="col-2">Tanggal Ekskul</th>
-                        <th class="col-2">Lokasi</th>
+                        <th class="col-3">Tanggal Ekskul</th>
+                        <th class="col-3">Lokasi</th>
                         <th class="col-2">Jam Mulai</th>
                         <th class="col-2">Jam Selesai</th>
-                        <th class="col-2">Status</th>
                         <th class="col-2">Aksi</th>
                       </tr>
                     </thead>
@@ -87,7 +86,6 @@ if (!isset($_SESSION['id_user'])) {
                           <td><?= $row['lokasi']; ?></td>
                           <td><?= $row['jam_mulai']; ?></td>
                           <td><?= $row['jam_selesai']; ?></td>
-                          <td><?= $row['status']; ?></td>
                           <td>
                             <a href="index.php?page=update-jadwal&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                               <i class="fas fa-edit"></i>

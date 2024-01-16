@@ -74,7 +74,6 @@ CREATE TABLE `tb_jadwal` (
   `lokasi` varchar(50) NOT NULL,
   `jam_mulai` time(6) NOT NULL,
   `jam_selesai` time(6) NOT NULL,
-  `status` enum('Ada','Tidak') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

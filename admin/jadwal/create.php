@@ -6,10 +6,8 @@ if (!isset($_SESSION['id_user'])) {
   die();
 }
 
-// Mendapatkan id_user dari user yang sedang login
 $id_user_login = $_SESSION['id_user'];
 
-// Query untuk mendapatkan id_ekskul user yang sedang login
 $query_user = "SELECT id_ekskul FROM tb_user WHERE id_user = $id_user_login";
 $result_user = $conn->query($query_user);
 $row_user = $result_user->fetch_assoc();
@@ -20,9 +18,8 @@ if (isset($_POST['kirim'])) {
   $lokasi = $_POST['lokasi'];
   $jam_mulai = $_POST['jam_mulai'];
   $jam_selesai = $_POST['jam_selesai'];
-  $status = $_POST['status'];
 
-  $query_create_jadwal = mysqli_query($conn, "INSERT INTO tb_jadwal (tanggal_ekskul, lokasi, id_ekskul, jam_mulai, jam_selesai, status) VALUES ('$tanggal_ekskul', '$lokasi', $id_ekskul_login, '$jam_mulai', '$jam_selesai', '$status')");
+  $query_create_jadwal = mysqli_query($conn, "INSERT INTO tb_jadwal (tanggal_ekskul, lokasi, id_ekskul, jam_mulai, jam_selesai) VALUES ('$tanggal_ekskul', '$lokasi', $id_ekskul_login, '$jam_mulai', '$jam_selesai')");
 
   if ($query_create_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
@@ -80,17 +77,6 @@ $conn->close();
                   <div class="form-group">
                     <label for="exampleInputPassword2">Jam Selesai</label>
                     <input type="time" name="jam_selesai" class="form-control" id="exampleInputPassword2" placeholder="Jam Selesai">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword2">Status</label>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="status" id="Ada" value="Ada">
-                      <label class="form-check-label" for="Ada">Ada</label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="status" id="Tidak" value="Tidak">
-                      <label class="form-check-label" for="Tidak">Tidak</label>
-                    </div>
                   </div>
                 </div>
                 <div class="card-footer">

@@ -13,9 +13,8 @@ if (isset($_POST['update'])) {
   $lokasi = $_POST['lokasi'];
   $jam_mulai = $_POST['jam_mulai'];
   $jam_selesai = $_POST['jam_selesai'];
-  $status = $_POST['status'];
 
-  $query_update_jadwal = mysqli_query($conn, "UPDATE tb_jadwal SET tanggal_ekskul='$tanggal_ekskul', lokasi='$lokasi', jam_mulai='$jam_mulai', jam_selesai='$jam_selesai', status='$status' WHERE id_jadwal=$id_jadwal");
+  $query_update_jadwal = mysqli_query($conn, "UPDATE tb_jadwal SET tanggal_ekskul='$tanggal_ekskul', lokasi='$lokasi', jam_mulai='$jam_mulai', jam_selesai='$jam_selesai' WHERE id_jadwal=$id_jadwal");
 
   if ($query_update_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
@@ -40,7 +39,6 @@ while ($row = mysqli_fetch_array($result)) {
   $lokasi = $row['lokasi'];
   $jam_mulai = $row['jam_mulai'];
   $jam_selesai = $row['jam_selesai'];
-  $status = $row['status'];
 }
 ?>
 
@@ -92,17 +90,6 @@ while ($row = mysqli_fetch_array($result)) {
                   <div class="form-group">
                     <label for="exampleInputPassword3">Jam Selesai</label>
                     <input type="time" name="jam_selesai" class="form-control" id="exampleInputPassword3" value="<?php echo $jam_selesai;?>" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword3">Status</label>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="status" id="Ada" value="Ada">
-                      <label class="form-check-label" for="Ada">Ada</label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="status" id="Tidak" value="Tidak">
-                      <label class="form-check-label" for="Tidak">Tidak</label>
-                    </div>
                   </div>
                 </div>
                 <div class="card-footer">

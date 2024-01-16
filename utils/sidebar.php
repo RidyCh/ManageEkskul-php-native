@@ -5,13 +5,12 @@ if (!isset($_SESSION['id_user'])) {
   header("Location: ../../login.php");
 }
 
-$query = "SELECT tb_ekskul.ekskul
+$query = "SELECT *, tb_ekskul.ekskul
     FROM tb_user
     INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul
     Where tb_user.id_user = '$_SESSION[id_user]'";
 
 $rs = $conn->query($query);
-$num = $rs->num_rows;
 $rrw = $rs->fetch_assoc();
 ?>
 
@@ -30,8 +29,8 @@ $rrw = $rs->fetch_assoc();
         <img src="../dist/img/profile.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block text-md"><?php echo $_SESSION['nama_lengkap']; ?></a>
-        <a href="#" class="d-block text-white text-sm">Ketua <?php echo $rrw['ekskul']; ?></a>
+        <a href="#" class="d-block text-md"><?= $rrw['nama_lengkap']; ?></a>
+        <a href="#" class="d-block text-white text-sm">Ketua <?= $rrw['ekskul']; ?></a>
       </div>
     </div>
 
@@ -65,12 +64,12 @@ $rrw = $rs->fetch_assoc();
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="index.php?page=profile" class="nav-link">
             <i class="nav-icon ion ion-information-circled"></i>
-            <p>Informasi</p>
+            <p>Profile</p>
           </a>
         </li>
-        <hr />
+        </hr>
         <li class="nav-item">
           <a href="../admin/logout.php" class="nav-link bg-danger">
             <i class="nav-icon ion ion-information-circled"></i>

@@ -45,6 +45,9 @@ if (isset($_GET['page'])) {
     case 'delete-presensi':
       include '../admin/presensi/delete.php';
       break;
+    case 'profile';
+      include '../admin/profile/index.php';
+      break;
   }
 } else {
   include "../admin/dashboard/index.php";

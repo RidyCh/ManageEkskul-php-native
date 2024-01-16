@@ -6,30 +6,32 @@ if (!isset($_SESSION['id_user'])) {
   die();
 }
 
-// Mendapatkan id_user dari user yang sedang login
-$id_user_login = $_SESSION['id_user'];
+$id_ekskul = $_SESSION['id_ekskul'];
+$id_jadwal = $_GET['id_jadwal'];
+$id_presensi = $_GET['id_presensi'];
 
-// Query untuk mendapatkan id_ekskul user yang sedang login
-$query_user = "SELECT id_ekskul FROM tb_user WHERE id_user = $id_user_login";
+$query_user = "SELECT *
+FROM tb_anggota
+-- INNER JOIN tb_ekskul ON tb_anggota.id_ekskul = tb_ekskul.id_ekskul
+-- WHERE tb_anggota.id_ekskul = $id_ekskul
+ORDER BY nama_anggota ASC";
+
 $result_user = $conn->query($query_user);
-$row_user = $result_user->fetch_assoc();
 
 if (isset($_POST['kirim'])) {
   $id_ekskul_login = $row_user['id_ekskul'];
-  $tanggal_ekskul = $_POST['tanggal_ekskul'];
-  $lokasi = $_POST['lokasi'];
-  $jam_mulai = $_POST['jam_mulai'];
-  $jam_selesai = $_POST['jam_selesai'];
-  $status = $_POST['status'];
+  $id_anggota = $_POST['id_anggota'];
+  $id_jadwal_view = $id_jadwal;
+  $kehadiran = $_POST['kehadiran'];
 
-  $query_create_jadwal = mysqli_query($conn, "INSERT INTO tb_jadwal (tanggal_ekskul, lokasi, id_ekskul, jam_mulai, jam_selesai, status) VALUES ('$tanggal_ekskul', '$lokasi', $id_ekskul_login, '$jam_mulai', '$jam_selesai', '$status')");
+  $query_create_presensi = mysqli_query($conn, "INSERT INTO tb_presensi (id_anggota, id_jadwal, id_ekskul, kehadiran) VALUES ('$id_anggota', '$id_jadwal_view, $id_ekskul_login, '$kehadiran')");
 
-  if ($query_create_jadwal === TRUE) {
+  if ($query_create_presensi === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../admin/jadwal/index.php\")
+            window.location = (\"../../admin/presensi/index.php\")
             </script>";
   } else {
-    echo "Error: " . $query_create_jadwal . "<br>" . $conn->error;
+    echo "Error: " . $query_create_presensi . "<br>" . $conn->error;
   }
 }
 $conn->close();
@@ -52,7 +54,7 @@ $conn->close();
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
     <section class="content">
       <div class="container">
@@ -70,10 +72,11 @@ $conn->close();
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nama Anggota</label>
                     <select name="id_anggota" class="form-control" id="exampleInputEmail1" placeholder="Atur Tanggal">
-                      <option value="1">1</option>
-                      <option value="1">1</option>
-                      <option value="1">1</option>
-                      <option value="1">1</option>
+                      <?php
+                      while ($row_user = $result_user->fetch_assoc()) {
+                        echo "<option value='" . $row_user['id_anggota'] . "'>" . $row_user['nama_anggota'] . "</option>";
+                      }
+                      ?>
                   </div>
                   <div class="form-group  ">
                     <label for="exampleInputPassword2">Kehadiran</label>
@@ -89,7 +92,7 @@ $conn->close();
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="kirim" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
               </form>
