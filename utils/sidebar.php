@@ -1,10 +1,6 @@
 <?php
 include '../conf/conn.php';
 
-if (!isset($_SESSION['id_user'])) {
-  header("Location: ../../login.php");
-}
-
 $query = "SELECT *, tb_ekskul.ekskul
     FROM tb_user
     INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_user.id_ekskul

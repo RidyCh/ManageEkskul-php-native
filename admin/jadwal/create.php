@@ -7,23 +7,27 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $id_user_login = $_SESSION['id_user'];
+$id_ekskul_login = $_SESSION['id_ekskul'];
 
-$query_user = "SELECT id_ekskul FROM tb_user WHERE id_user = $id_user_login";
-$result_user = $conn->query($query_user);
-$row_user = $result_user->fetch_assoc();
+$query_anggota = mysqli_query($conn, "SELECT *
+FROM tb_anggota
+INNER JOIN tb_presensi ON tb_presensi.id_ekskul = tb_anggota.id_ekskul
+Where tb_anggota.id_ekskul = '$_SESSION[id_ekskul]'");
+
+$row_anggota = $query_anggota->fetch_assoc();
 
 if (isset($_POST['kirim'])) {
-  $id_ekskul_login = $row_user['id_ekskul'];
+  $id_ekskul = $id_ekskul_login;
   $tanggal_ekskul = $_POST['tanggal_ekskul'];
   $lokasi = $_POST['lokasi'];
   $jam_mulai = $_POST['jam_mulai'];
   $jam_selesai = $_POST['jam_selesai'];
 
-  $query_create_jadwal = mysqli_query($conn, "INSERT INTO tb_jadwal (tanggal_ekskul, lokasi, id_ekskul, jam_mulai, jam_selesai) VALUES ('$tanggal_ekskul', '$lokasi', $id_ekskul_login, '$jam_mulai', '$jam_selesai')");
+  $query_create_jadwal = mysqli_query($conn, "INSERT INTO tb_jadwal (tanggal_ekskul, lokasi, id_ekskul, jam_mulai, jam_selesai) VALUES ('$tanggal_ekskul', '$lokasi', $id_ekskul, '$jam_mulai', '$jam_selesai')");
 
   if ($query_create_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../admin/jadwal/index.php\")
+            window.location = (\"/admin/jadwal/index.php\")
             </script>";
   } else {
     echo "Error: " . $query_create_jadwal . "<br>" . $conn->error;
