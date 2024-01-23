@@ -13,7 +13,7 @@ if (isset($_SESSION['id_user'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ekskul Manager</title>
+  <title>Ekskul Manager | Login</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -35,99 +35,99 @@ if (isset($_SESSION['id_user'])) {
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <!--===============================================================================================-->
+  <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="css/util.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!--===============================================================================================-->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-  <div class="wrapper">
 
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
+  <div class="limiter">
+    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+      <div class="wrap-login100">
+        <!-- <a href="index.php" class=" btn btn-danger align-items-center rounded-pill"><i class="ion ion-arrow-left-a"></i> Back</a> -->
+        <form action="" method="post" class="login100-form validate-form">
+          <span class="login100-form-logo">
+            <i class="zmdi zmdi-landscape"></i>
+          </span>
 
-    <!-- Navbar -->
-    <?php include('utils/navbar.php') ?>
+          <span class="login100-form-title p-b-34 p-t-27">
+            Log in
+          </span>
 
-    <!-- /.navbar -->
+          <div class="wrap-input100 validate-input" data-validate="Enter username">
+            <input class="input100" type="text" name="username" placeholder="Username" required>
+            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+          </div>
 
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary bg-purple elevation-4">
-      <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Manage Ekskul</span>
-      </a>
+          <div class="wrap-input100 validate-input" data-validate="Enter password">
+            <input class="input100" type="password" name="password" placeholder="Password" required>
+            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+          </div>
 
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <!-- Sidebar Menu -->
-        <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-                 with font-awesome or any other icon font library -->
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-home"></i>
-                <p>Beranda</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>Anggota</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-newspaper"></i>
-                <p>Ekstrakulikuler</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="login.php" class="nav-link bg-danger">
-                <i class="nav-icon ion ion-information-circled"></i>
-                <p>Login</p>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <!-- /.sidebar-menu -->
+          <div class="container-login100-form-btn">
+            <button type="submit" name="login" class="login100-form-btn">
+              <i class="ion ion-arrow-right-a"></i> &nbsp;Login
+            </button>
+          </div>
+        </form>
       </div>
-      <!-- /.sidebar -->
-    </aside>
-
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Beranda</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Beranda</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-        <section class="content">
-            <h2>Selamat Datang di Web</h2>
-        </section>
     </div>
-    <!-- /.content-wrapper -->
-    <?php include('utils/footer.php') ?>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
   </div>
-  <!-- ./wrapper -->
+
+
+  <div id="dropDownSelect1"></div>
+
+  <?php
+  if (isset($_POST['login'])) {
+    include 'conf/conn.php';
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $password = md5($password);
+
+    $query = "SELECT * FROM tb_user WHERE username = '$username' AND password = '$password'";
+    $rs = mysqli_query($conn, $query);
+    $num = mysqli_num_rows($rs);
+    $rows = $rs->fetch_assoc();
+
+    if ($num > 0) {
+
+      $_SESSION['id_user'] = $rows['id_user'];
+      $_SESSION['username'] = $rows['username'];
+      $_SESSION['nama_lengkap'] = $rows['nama_lengkap'];
+      $_SESSION['id_ekskul'] = $rows['id_ekskul'];
+
+      echo "<script type = \"text/javascript\">
+      window.location = (\"admin/index.php\")
+      </script>";
+    } else {
+
+      echo "<div class='alert alert-danger' role='alert'>
+      Invalid Username/Password!
+      </div>";
+    }
+  }
+  ?>
 
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
@@ -163,6 +163,22 @@ if (isset($_SESSION['id_user'])) {
   <script src="dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/animsition/js/animsition.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/bootstrap/js/popper.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/select2/select2.min.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/daterangepicker/moment.min.js"></script>
+  <script src="vendor/daterangepicker/daterangepicker.js"></script>
+  <!--===============================================================================================-->
+  <script src="vendor/countdowntime/countdowntime.js"></script>
+  <!--===============================================================================================-->
+  <script src="js/main.js"></script>
 </body>
 
 </html>

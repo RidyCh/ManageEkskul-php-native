@@ -3,9 +3,6 @@ if (isset($_GET['page'])) {
   $page = $_GET['page'];
   switch ($page) {
       // Beranda
-    case 'dashboard':
-      include 'admin/index.php';
-      break;
     case 'anggota':
       include '../admin/anggota/index.php';
       break;
@@ -34,18 +31,12 @@ if (isset($_GET['page'])) {
       include '../admin/presensi/index.php';
       break;
     case 'create-presensi':
-      include '../admin/presensi/create.php';
-      break;
-    case 'jadwal-presensi':
       include '../admin/presensi/presensi.php';
       break;
-    case 'update-presensi':
+    case 'view-presensi':
       include '../admin/presensi/update.php';
       break;
-    case 'delete-presensi':
-      include '../admin/presensi/delete.php';
-      break;
-    case 'profile';
+    case 'informasi';
       include '../admin/profile/index.php';
       break;
   }

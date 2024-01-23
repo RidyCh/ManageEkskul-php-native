@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2024 at 05:26 AM
+-- Generation Time: Jan 23, 2024 at 04:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,13 +33,6 @@ CREATE TABLE `tb_anggota` (
   `kelas` varchar(15) NOT NULL,
   `id_ekskul` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tb_anggota`
---
-
-INSERT INTO `tb_anggota` (`id_anggota`, `nama_anggota`, `kelas`, `id_ekskul`) VALUES
-(1, 'ren', '12', 1);
 
 -- --------------------------------------------------------
 
@@ -72,8 +65,8 @@ CREATE TABLE `tb_jadwal` (
   `id_ekskul` int(11) NOT NULL,
   `tanggal_ekskul` date NOT NULL,
   `lokasi` varchar(50) NOT NULL,
-  `jam_mulai` time(6) NOT NULL,
-  `jam_selesai` time(6) NOT NULL
+  `jam_mulai` time(4) NOT NULL,
+  `jam_selesai` time(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -86,6 +79,7 @@ CREATE TABLE `tb_presensi` (
   `id_presensi` int(11) NOT NULL,
   `id_anggota` int(11) NOT NULL,
   `id_jadwal` int(11) NOT NULL,
+  `id_ekskul` int(11) NOT NULL,
   `kehadiran` enum('Hadir','Tidak Hadir') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -98,7 +92,7 @@ CREATE TABLE `tb_presensi` (
 CREATE TABLE `tb_user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(15) NOT NULL,
-  `password` varchar(15) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
   `id_ekskul` int(11) NOT NULL,
   `nama_pembina` varchar(50) NOT NULL
@@ -109,9 +103,10 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `nama_lengkap`, `id_ekskul`, `nama_pembina`) VALUES
-(1, 'admin-basket', 'password', 'ketua basket', 1, ''),
-(2, 'admin-futsal', 'password', 'ketua futsal', 2, ''),
-(3, 'admin-cospala', 'password', 'ketua cospala', 3, '');
+(1, 'admin-basket', '5f4dcc3b5aa765d61d8327deb882cf99', 'Admin Basket', 1, 'Bu Sri'),
+(2, 'admin-futsal', '5f4dcc3b5aa765d61d8327deb882cf99', 'ketua futsal', 2, 'Pak Agus'),
+(3, 'admin-cospala', '5f4dcc3b5aa765d61d8327deb882cf99', 'ketua cospala', 3, ''),
+(4, 'basket', '5f4dcc3b5aa765d61d8327deb882cf99', 'Admin Basket', 1, '');
 
 --
 -- Indexes for dumped tables
@@ -143,7 +138,8 @@ ALTER TABLE `tb_jadwal`
 ALTER TABLE `tb_presensi`
   ADD PRIMARY KEY (`id_presensi`),
   ADD KEY `id_jadwal` (`id_jadwal`),
-  ADD KEY `presensi_ibfk_1` (`id_anggota`);
+  ADD KEY `presensi_ibfk_1` (`id_anggota`),
+  ADD KEY `tb_presensi_ibfk_3` (`id_ekskul`);
 
 --
 -- Indexes for table `tb_user`
@@ -161,7 +157,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
-  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_anggota` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_ekskul`
@@ -179,13 +175,13 @@ ALTER TABLE `tb_jadwal`
 -- AUTO_INCREMENT for table `tb_presensi`
 --
 ALTER TABLE `tb_presensi`
-  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_presensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -208,7 +204,8 @@ ALTER TABLE `tb_jadwal`
 --
 ALTER TABLE `tb_presensi`
   ADD CONSTRAINT `tb_presensi_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `tb_anggota` (`id_anggota`),
-  ADD CONSTRAINT `tb_presensi_ibfk_2` FOREIGN KEY (`id_jadwal`) REFERENCES `tb_jadwal` (`id_jadwal`);
+  ADD CONSTRAINT `tb_presensi_ibfk_2` FOREIGN KEY (`id_jadwal`) REFERENCES `tb_jadwal` (`id_jadwal`),
+  ADD CONSTRAINT `tb_presensi_ibfk_3` FOREIGN KEY (`id_ekskul`) REFERENCES `tb_user` (`id_ekskul`);
 
 --
 -- Constraints for table `tb_user`

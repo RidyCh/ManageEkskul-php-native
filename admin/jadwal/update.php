@@ -18,7 +18,7 @@ if (isset($_POST['update'])) {
 
   if ($query_update_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../admin/jadwal/index.php\")
+            window.location = (\"index.php?page=jadwal\")
             </script>";
   } else {
     echo "Error: " . $query_update_jadwal . "<br>" . $conn->error;
@@ -53,7 +53,7 @@ while ($row = mysqli_fetch_array($result)) {
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item">Jadwal</li>
               <li class="breadcrumb-item active">Edit Jadwal</li>
             </ol>
@@ -66,9 +66,9 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="row">
           <div class="col-12">
             <!-- general form elements -->
-            <div class="card card-warning">
+            <div class="card card-purple">
               <div class="card-header">
-                <h3 class="card-title">Edit Jadwal</h3>
+                <h3 class="card-title">Edit Data Jadwal</h3>
               </div>
               <form action="" method="post">
                 <div class="card-body">
@@ -93,7 +93,7 @@ while ($row = mysqli_fetch_array($result)) {
                   </div>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" name="update" class="btn btn-warning">Kirim</button>
+                  <button type="submit" name="update" class="btn btn-warning">Edit</button>
                 </div>
               </form>
             </div>

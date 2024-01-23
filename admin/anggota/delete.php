@@ -7,7 +7,7 @@ $result = mysqli_query($conn, "DELETE FROM tb_anggota WHERE id_anggota=$id_anggo
 
 if ($result === TRUE) {
   echo "<script type = \"text/javascript\">
-          window.location = (\"../../admin/anggota/index.php\")
+          window.location = (\"index.php?page=anggota\")
           </script>";
 } else {
   echo "Error: " . $result . "<br>" . $conn->error;

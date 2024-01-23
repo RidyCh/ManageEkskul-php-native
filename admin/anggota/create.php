@@ -2,7 +2,7 @@
 include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
-  header("Location: ../../login.php");
+  header("Location: ../../index.php");
   die();
 }
 
@@ -23,13 +23,14 @@ if (isset($_POST['kirim'])) {
 
   if ($query_create_anggota === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../admin/anggota/index.php\")
+            window.location = (\"index.php?page=anggota\")
             </script>";
   } else {
     echo "Error: " . $query_create_anggota . "<br>" . $conn->error;
   }
 }
 $conn->close();
+
 ?>
 
 <div class="wrapper">
@@ -43,7 +44,7 @@ $conn->close();
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item">Anggota</li>
               <li class="breadcrumb-item active">Tambah Anggota</li>
             </ol>
@@ -56,9 +57,9 @@ $conn->close();
         <div class="row">
           <div class="col-12">
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card card-purple">
               <div class="card-header">
-                <h3 class="card-title"></h3>
+                <h3 class="card-title">Tambah Anggota Baru</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -76,7 +77,7 @@ $conn->close();
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" name="kirim" class="btn btn-primary" id="btn">Kirim</button>
+                  <button type="submit" name="kirim" class="btn btn-success" id="btn">Kirim</button>
                 </div>
               </form>
             </div>

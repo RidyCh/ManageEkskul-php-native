@@ -2,7 +2,7 @@
 include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
-  header("Location: ../../login.php");
+  header("Location: ../../index.php");
   die();
 }
 
@@ -23,7 +23,7 @@ if (isset($_POST['kirim'])) {
 
   if ($query_create_jadwal === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../admin/jadwal/index.php\")
+            window.location = (\"index.php?page=jadwal\")
             </script>";
   } else {
     echo "Error: " . $query_create_jadwal . "<br>" . $conn->error;
@@ -43,9 +43,9 @@ $conn->close();
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item">Jadwal</li>
-              <li class="breadcrumb-item active">Create Jadwal</li>
+              <li class="breadcrumb-item active">Tambah Jadwal</li>
             </ol>
           </div>
         </div>
@@ -56,31 +56,31 @@ $conn->close();
         <div class="row">
           <div class="col-12">
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card card-purple">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">Buat Jadwal Baru</h3>
               </div>
               <form action="" method="post">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Tanggal Ekskul</label>
-                    <input type="date" name="tanggal_ekskul" class="form-control" id="exampleInputEmail1" placeholder="Atur Tanggal">
+                    <input type="date" name="tanggal_ekskul" class="form-control" id="exampleInputEmail1" placeholder="Atur Tanggal" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Lokasi</label>
-                    <input type="text" name="lokasi" class="form-control" id="exampleInputPassword1" placeholder="lokasi">
+                    <input type="text" name="lokasi" class="form-control" id="exampleInputPassword1" placeholder="lokasi" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword2">Jam Mulai</label>
-                    <input type="time" name="jam_mulai" class="form-control" id="exampleInputPassword2" placeholder="Jam Mulai">
+                    <input type="time" name="jam_mulai" class="form-control" id="exampleInputPassword2" placeholder="Jam Mulai" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword2">Jam Selesai</label>
-                    <input type="time" name="jam_selesai" class="form-control" id="exampleInputPassword2" placeholder="Jam Selesai">
+                    <input type="time" name="jam_selesai" class="form-control" id="exampleInputPassword2" placeholder="Jam Selesai" required>
                   </div>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" name="kirim" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="kirim" class="btn btn-success">Kirim</button>
                 </div>
               </form>
             </div>

@@ -2,7 +2,7 @@
 include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
-  header("Location: ../../login.php");
+  header("Location: ../../index.php");
   die();
 }
 
@@ -11,10 +11,10 @@ if (isset($_POST['simpan'])) {
 
   $nama_lengkap = $_POST['nama_lengkap'];
   $nama_pembina = $_POST['nama_pembina'];
-  $password = $_POST['password'];
+  // $password = $_POST['password'];
   // $password = md5($password);
 
-  $update_info = mysqli_query($conn, "UPDATE tb_user SET nama_lengkap='$nama_lengkap', nama_pembina='$nama_pembina', password='$password' WHERE id_user = $id_user");
+  $update_info = mysqli_query($conn, "UPDATE tb_user SET nama_lengkap='$nama_lengkap', nama_pembina='$nama_pembina' WHERE id_user = $id_user");
 }
 $conn->close();
 ?>
@@ -36,7 +36,7 @@ $result_update = mysqli_query($conn, "SELECT * FROM tb_user WHERE id_user = $id_
 while ($row = mysqli_fetch_array($result_update)) {
   $nama_lengkap = $row['nama_lengkap'];
   $nama_pembina = $row['nama_pembina'];
-  $password = $row['password'];
+  // $password = $row['password'];
 }
 ?>
 
@@ -50,8 +50,8 @@ while ($row = mysqli_fetch_array($result_update)) {
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Informasi</li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item active">Informasi Ekstrakulikuler</li>
             </ol>
           </div>
         </div>
@@ -62,9 +62,9 @@ while ($row = mysqli_fetch_array($result_update)) {
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <div class="card card-primary">
+            <div class="card card-purple">
               <div class="card-header">
-                <h3 class="card-title"><?= $_SESSION['username']; ?> | <?= $rrw['ekskul']; ?></h3>
+                <h3 class="card-title"><span class="shadow-lg px-2 bg-white rounded"><?= $_SESSION['username']; ?></span> | <?= $rrw['ekskul']; ?></h3>
               </div>
               <form action="" method="post">
                 <div class="row">
@@ -77,17 +77,17 @@ while ($row = mysqli_fetch_array($result_update)) {
                   </div>
                   <div class="card-body ">
                     <div class="form-group">
-                      <label for="1">Nama Lengkap</label>
+                      <label for="1">Nama Ketua Ekstra</label>
                       <input type="text" name="nama_lengkap" class="form-control" id="1" value="<?= $nama_lengkap; ?>" required>
                     </div>
                     <div class="form-group">
-                      <label for="2">Nama Pembina</label>
+                      <label for="2">Nama Pembina Ekstra</label>
                       <input type="text" name="nama_pembina" class="form-control" id="2" value="<?= $nama_pembina; ?>" required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="3">Ganti Password</label>
-                      <input type="password" name="password" class="form-control" id="3" value="<?= $password; ?>" required>
-                    </div>
+                      <input type="password" name="password" class="form-control" id="3" value="<?//= $password; ?>" required>
+                    </div> -->
                   </div>
                 </div>
                 <div class="card-footer">

@@ -2,7 +2,7 @@
 include '../conf/conn.php';
 
 if (!isset($_SESSION['id_user'])) {
-  header("Location: ../../login.php");
+  header("Location: ../../index.php");
   die();
 }
 
@@ -16,7 +16,7 @@ if (isset($_POST['update'])) {
 
   if ($query_update_anggota === TRUE) {
     echo "<script type = \"text/javascript\">
-            window.location = (\"../../admin/anggota/index.php\")
+            window.location = (\"index.php?page=anggota\")
             </script>";
   } else {
     echo "Error: " . $query_update_anggota . "<br>" . $conn->error;
@@ -49,9 +49,9 @@ while ($row = mysqli_fetch_array($result)) {
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               <li class="breadcrumb-item">Anggota</li>
-              <li class="breadcrumb-item active">Create Anggota</li>
+              <li class="breadcrumb-item active">Edit Anggota</li>
             </ol>
           </div>
         </div>
@@ -62,9 +62,9 @@ while ($row = mysqli_fetch_array($result)) {
         <div class="row">
           <div class="col-12">
             <!-- general form elements -->
-            <div class="card card-primary">
+            <div class="card card-purple">
               <div class="card-header">
-                <h3 class="card-title">Quick Example</h3>
+                <h3 class="card-title">Edit Data Anggota</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -82,7 +82,7 @@ while ($row = mysqli_fetch_array($result)) {
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" name="update" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="update" class=" btn btn-warning">Edit</button>
                 </div>
               </form>
             </div>

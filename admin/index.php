@@ -1,6 +1,10 @@
 <?php
 include '../conf/conn.php';
 include '../conf/session.php';
+if (!isset($_SESSION['id_user'])) {
+  header("Location: ../index.php");
+  die();
+}
 
 ?>
 
@@ -10,8 +14,9 @@ include '../conf/session.php';
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Manage Ekskul</title>
+  <title>Ekskul Manager</title>
 
+  <link rel="icon" type="image/png" href="../images/icons/favicon.ico" />
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -39,17 +44,42 @@ include '../conf/session.php';
 
   <style>
     :root {
-      --ungu: #FF33E9;
+      --blue: #008CFF;
+      --rose: #e91e63;
+      --orange: #FFA600;
+      --green: #2DAC0E;
+      --purple: #5E0E94;
+      --purple-light: #AE7ED4;
     }
 
     .button {
-      background-color: #FFA500;
+      background-color: var(--purple);
     }
-    .hh {
-      background-color: var(--ungu);
+    .button:hover {
+      background-color: var(--purple-light);
+      color: #000000;
+    }
+    .pl {
+      background-color: var(--purple-light);
+      color: var(--purple);
+    }
+    .rose {
+      background-color: var(--rose);
+    }
+    .orange {
+      background-color: var(--orange);
+    }
+    .green {
+      background-color: var(--green);
+    }
+    .blue {
+      background-color: var(--blue);
+    }
+    .purple {
+      background-color: var(--purple);
     }
 
-    
+
   </style>
 </head>
 

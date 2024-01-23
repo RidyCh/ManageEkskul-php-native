@@ -7,7 +7,7 @@ $result = mysqli_query($conn, "DELETE FROM tb_jadwal WHERE id_jadwal=$id_jadwal"
 
 if ($result === TRUE) {
   echo "<script type = \"text/javascript\">
-          window.location = (\"../../admin/jadwal/index.php\")
+          window.location = (\"index.php?page=jadwal\")
           </script>";
 } else {
   echo "Error: " . $result . "<br>" . $conn->error;
