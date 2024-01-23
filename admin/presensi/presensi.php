@@ -60,53 +60,75 @@ if (!isset($_SESSION['id_user'])) {
               $no = 0;
               $id_jadwal = $_GET['id_jadwal'];
 
-              $query = mysqli_query($conn, "SELECT tb_anggota.nama_anggota, tb_jadwal.tanggal_ekskul, tb_ekskul.ekskul, tb_presensi.kehadiran
+              $query_tanggal = mysqli_query($conn, "SELECT *, tb_jadwal.tanggal_ekskul
+              from tb_jadwal
+              where tb_jadwal.id_jadwal = $id_jadwal");
+
+              $rows = $query_tanggal->fetch_assoc();
+
+              $query = mysqli_query($conn, "SELECT tb_anggota.id_anggota, tb_anggota.nama_anggota, tb_jadwal.tanggal_ekskul, tb_ekskul.ekskul, tb_presensi.kehadiran
               from tb_anggota
               LEFT JOIN tb_presensi ON tb_anggota.id_anggota = tb_presensi.id_anggota
-              -- left join tb_ekskul on tb_presensi.id_ekskul=tb_ekskul.id_ekskul
               LEFT JOIN tb_jadwal on tb_presensi.id_jadwal = tb_jadwal.id_jadwal
-              INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_anggota.id_ekskul
+              Left JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_anggota.id_ekskul
               where tb_anggota.id_ekskul = '$_SESSION[id_ekskul]'");
 
-              while ($row = mysqli_fetch_assoc($query)) {
-              ?>
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title"><?= $row['tanggal_ekskul']; ?> | <a href="index.php?page=create-presensi" class="btn btn-primary"><i class="ion ion-plus"></i> Tambah</a></h3>
-                  </div>
+              if (isset($_POST['kirim'])) {
+                while ($row1 = mysqli_fetch_assoc($query)) {
+                  $id_ekskul_login = $_SESSION['id_ekskul'];
+                  $id_anggota = $row1['id_anggota'];
+                  $jadwal = $id_jadwal;
+                  $kehadiran = $_POST[$id_anggota];
 
-                  <div class="card-body">
+                  $query_presensi = mysqli_query($conn, "INSERT INTO tb_presensi (id_anggota, id_jadwal, id_ekskul, kehadiran) VALUES ('$id_anggota', '$jadwal', $id_ekskul_login, '$kehadiran')");
+                }
+              }
+              ?>
+
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title"><?= $rows['tanggal_ekskul']; ?></h3>
+                </div>
+
+                <div class="card-body">
+                  <form action="" method="post">
                     <table id="example1" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="col-1">No</th>
-                          <th class="col-4">Nama Anggota</th>
+                          <th class="col-3">Nama Anggota</th>
                           <th class="col-3">Ekstrakulikuler</th>
-                          <th class="col-2">Kehadiran</th>
-                          <th class="col-2">Aksi</th>
+                          <th class="col-3">Keterangan</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td><?= $no = $no + 1; ?></td>
-                          <td><?= $row['nama_anggota']; ?></td>
-                          <td><?= $row['ekskul']; ?></td>
-                          <td><?= $row['kehadiran']; ?></td>
-                          <td>
-                            <a href="index.php?page=update-presensi" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
-                              <i class="fas fa-edit"></i>
-                            </a>
-                            <!-- <a href="index.php?page=delete-presensi&id_presensi=<?//= $row['id_presensi']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
-                              <i class="fas fa-trash"></i> -->
-                            </a>
-                          </td>
-                        </tr>
-                      <?php } ?>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($query)) {
+                        ?>
+                          <tr>
+                            <td><?= $no = $no + 1; ?></td>
+                            <td><?= $row['nama_anggota']; ?>
+                              <input type="hidden" name="<?= $row['id_anggota']; ?>" value="<?= $row['id_anggota']; ?>">
+                            </td>
+                            <td><?= $row['ekskul']; ?></td>
+                            <td>
+                              <input type="radio" name="<?= $row['id_anggota']; ?>" value="Hadir" id="1">
+                              <label for="1">Hadir</label>
+                              <input type="radio" name="<?= $row['id_anggota']; ?>" value="Tidak Hadir" id="2">
+                              <label for="2">Tidak Hadir</label>
+                            </td>
+                          </tr>
+                        <?php } ?>
+                        <div class="card-footer">
+                          <button type="submit" name="kirim" class="btn btn-primary" id="btn">Kirim</button>
+                          <a href="index.php?page=update-presensi&id_jadwal=<?= $rows['id_jadwal']; ?>" class="btn btn-success" id="btn"><i class="fas fa-eye"></i> Hasil</a>
+                        </div>
                       </tbody>
                     </table>
-                  </div>
-                  <!-- /.card-body -->
+                  </form>
                 </div>
+                <!-- /.card-body -->
+              </div>
             </div>
           </div>
       </section>

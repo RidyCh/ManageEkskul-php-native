@@ -82,7 +82,7 @@ if (!isset($_SESSION['id_user'])) {
                           <td><?= $row['tanggal_ekskul']; ?></td>
                           <td>
                             <a href="index.php?page=jadwal-presensi&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-success">
-                              <i class="fas fa-eye"></i>
+                               Tambah Presensi
                             </a>
                           </td>
                         </tr>
