@@ -77,6 +77,7 @@ $conn->close();
                 <!-- /.card-body -->
 
                 <div class="card-footer">
+                  <a href="index.php?page=anggota" class="btn btn-danger" id="btn">Kembali</a>
                   <button type="submit" name="kirim" class="btn btn-success" id="btn">Kirim</button>
                 </div>
               </form>
