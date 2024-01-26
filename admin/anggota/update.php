@@ -82,6 +82,7 @@ while ($row = mysqli_fetch_array($result)) {
                 <!-- /.card-body -->
 
                 <div class="card-footer">
+                  <a href="index.php?page=anggota" class="btn btn-danger" id="btn">Kembali</a>
                   <button type="submit" name="update" class=" btn btn-warning">Edit</button>
                 </div>
               </form>
