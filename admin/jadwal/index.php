@@ -56,13 +56,17 @@ if (!isset($_SESSION['id_user'])) {
                       INNER JOIN tb_ekskul ON tb_ekskul.id_ekskul = tb_jadwal.id_ekskul
                       Where tb_jadwal.id_ekskul = '$_SESSION[id_ekskul]'");
                     while ($row = mysqli_fetch_array($query)) {
+                      $mulai = $row['jam_mulai'];
+                      $selesai = $row['jam_selesai'];
+                      $jam_mulai = date("H:i:s", strtotime($mulai));
+                      $jam_selesai = date("H:i:s", strtotime($selesai));
                     ?>
                       <tr>
                         <td><?= $no = $no + 1; ?></td>
                         <td><?= $row['tanggal_ekskul']; ?></td>
                         <td><?= $row['lokasi']; ?></td>
-                        <td><?= $row['jam_mulai']; ?></td>
-                        <td><?= $row['jam_selesai']; ?></td>
+                        <td><?= $jam_mulai; ?></td>
+                        <td><?= $jam_selesai; ?></td>
                         <td>
                           <a href="index.php?page=update-jadwal&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                             <i class="fas fa-edit"></i>
