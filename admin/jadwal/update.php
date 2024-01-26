@@ -93,6 +93,7 @@ while ($row = mysqli_fetch_array($result)) {
                   </div>
                 </div>
                 <div class="card-footer">
+                  <a href="index.php?page=jadwal" class="btn btn-danger" id="btn">Kembali</a>
                   <button type="submit" name="update" class="btn btn-warning">Edit</button>
                 </div>
               </form>
