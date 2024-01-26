@@ -71,9 +71,15 @@ if (!isset($_SESSION['id_user'])) {
                           <a href="index.php?page=update-jadwal&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                             <i class="fas fa-edit"></i>
                           </a>
-                          <a href="index.php?page=delete-jadwal&id_jadwal=<?= $row['id_jadwal']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
-                            <i class="fas fa-trash"></i>
-                          </a>
+                          <?php
+                          $data = mysqli_query($conn, "SELECT * from tb_presensi where id_jadwal = $id_jadwal");
+                          $num_cek = $data->num_rows;
+                          $row_cek = $data->fetch_assoc();
+
+                          if ($num_cek <= 0) {
+                            echo '| <a href="index.php?page=delete-jadwal&id_jadwal=' . $row['id_jadwal'] . '" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger"><i class="fas fa-trash"></i></a>';
+                          }
+                          ?>
                         </td>
                       </tr>
                     <?php } ?>
