@@ -80,6 +80,7 @@ $conn->close();
                   </div>
                 </div>
                 <div class="card-footer">
+                  <a href="index.php?page=jadwal" class="btn btn-danger" id="btn">Kembali</a>
                   <button type="submit" name="kirim" class="btn btn-success">Kirim</button>
                 </div>
               </form>
