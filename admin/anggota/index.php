@@ -73,7 +73,7 @@ $rrw = $rs->fetch_assoc();
                         <td>
                           <a href="index.php?page=update-anggota&id_anggota=<?= $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-primary">
                             <i class="fas fa-edit"></i>
-                          </a>
+                          </a> | 
                           <a href="index.php?page=delete-anggota&id_anggota=<?= $row['id_anggota']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline btn btn-danger">
                             <i class="fas fa-trash"></i>
                           </a>
